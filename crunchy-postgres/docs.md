@@ -30,4 +30,15 @@ spec:
       - --target="2024-01-12 14:15:11-04"
 ```
 Опция `- --target` указывает на какое время необходимо востановиться, цыфры после времени указывают часовой пояс по UTC, в нашем случае новосибирское время указывается вот так `2024-01-12 14:15:11+07`
+
+Востановление выполняется командой:
+
+`kubectl annotate -n crunchy-postgres postgrescluster mypg --overwrite postgres-operator.crunchydata.com pgbackrest-restore=id1`
+
+Где `restore=id1` номер резервного востановления, те создать еще одно такое не получится, что бы пересоздать нужно изменить номер`id1`
+
+Ключ `--overwrite` перезапишет текущий рабочий кластер из бэкапа.
+
+Для подробной информации стоит посетить оф [документацию](https://access.crunchydata.com/documentation/postgres-operator/latest/tutorials/backups-disaster-recovery/disaster-recovery)
+
 </details>
