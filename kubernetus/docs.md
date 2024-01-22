@@ -60,7 +60,7 @@ To see the stack trace of this error execute with --v=5 or higher
 То у нас проблема с сертификатами и стадии инициализации control plane нужно пройти в ручную:
 
 - Создаем папки на новой ноде `mkdir /home/$USER/pki` ,  `mkdir /home/$USER/pki/etcd`
-- Копируем сертификаты и конфиг с рабочей мастер ноды 
+- Копируем сертификаты и конфиг с рабочей мастер ноды на новую
 `scp /etc/kubernetes/pki/ca.{key,crt} maks@192.168.1.22:/home/maks/pki/`
 `scp /etc/kubernetes/pki/etcd/ca.{key,crt} maks@192.168.1.22:/home/maks/pki/etcd`
 `scp /etc/kubernetes/admin.conf maks@192.168.1.22:/home/maks/`
@@ -69,7 +69,7 @@ To see the stack trace of this error execute with --v=5 or higher
 `/etc/kubernetes/pki/etcd/`
 `/etc/kubernetes/admin.conf`
 - Делаем `export KUBECONFIG=/etc/kubernetes/admin.conf`
-- Копируем конфиг кластера с рабочей мастер ноды ``sudo scp /var/lib/kubelet/config.yaml maks@192.168.1.22:/home/maks/``
+- Копируем конфиг кластера с рабочей мастер ноды на новую ``sudo scp /var/lib/kubelet/config.yaml maks@192.168.1.22:/home/maks/``
 - Меняем там параметры на свои в полях, сохраняем:
 ```
 advertiseAddress:
@@ -78,7 +78,7 @@ node-ip:
 name: 
 ```
 Параметр токен можно узнать командой на рабочей ноде `kubeadm token list` если нет то генерируем новый `kubeadm token create`
-- Заходим под пользователем sudo проверяем доступ к кластеру `kubectl get po -A`
+- Заходим под пользователем **sudo** проверяем доступ к кластеру `kubectl get po -A`
 - Инициализируем фазу сертификатов
 `kubeadm init phase certs all`
 - Запускаем kubelet с нашим конфигом кластера
