@@ -15,6 +15,10 @@ spec:
 ```
 kubectl annotate -n crunchy-postgres postgrescluster mypg postgres-operator.crunchydata.com pgbackrest-backup="$(date)"
 ```
+Для версии postgres-operator-examples-8-5.1.2-0 копирование выполняется командой:
+```
+kubectl annotate -n crunchy-postgres postgrescluster clustername postgres-operator.crunchydata.com/pgbackrest-backup="$( date '+%F_%H:%M:%S' )"
+```
 Ключ `--overwrite` перезапишет последний актуальный бэкап.
 
 Для востановления только что созданного бэкапа в spec должна присутствовать конфигурация:
