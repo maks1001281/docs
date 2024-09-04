@@ -91,3 +91,15 @@ name:
 - Проверяем подключение
 
 </details>
+
+<details>
+<summary>Увеличение места `PVC` в statefulset</summary>
+
+Просто так место в `sts` не увеличить, получим ошибку:
+
+```
+The StatefulSet "web" is invalid: spec: Forbidden: updates to statefulset spec for fields other than 'replicas', 'template', 'updateStrategy', 'persistentVolumeClaimRetentionPolicy' and 'minReadySeconds' are forbidden
+```
+Для решения проблемы нужно удалить `sts` с ключом  ```--cascade=orphan```, и увеличить руками место в `PVC`, при удалении с этим ключом удалится только `sts` при этом не удалив связанные обьекты, после удаления у увеличения места нужно заново применить `sts` добавив места.
+
+</details>
